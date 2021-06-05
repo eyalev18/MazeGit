@@ -1,12 +1,7 @@
 package View;
 
-import algorithms.mazeGenerators.IMazeGenerator;
+import Model.MazeGeneratorSolver;
 import algorithms.mazeGenerators.Maze;
-import algorithms.mazeGenerators.MyMazeGenerator;
-import algorithms.search.AState;
-import algorithms.search.BestFirstSearch;
-import algorithms.search.SearchableMaze;
-import algorithms.search.Solution;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
@@ -20,11 +15,10 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
-    public MazeGenerator generator;
+    public MazeGeneratorSolver generator;
     public TextField textField_mazeRows;
     public TextField textField_mazeColumns;
     public MazeDisplayer mazeDisplayer;
@@ -58,7 +52,7 @@ public class Controller implements Initializable {
 
     public void generateMaze(ActionEvent actionEvent) {
         if(generator == null)
-            generator = new MazeGenerator();
+            generator = new MazeGeneratorSolver();
 
         int rows = Integer.valueOf(textField_mazeRows.getText());
         int cols = Integer.valueOf(textField_mazeColumns.getText());
@@ -68,15 +62,15 @@ public class Controller implements Initializable {
         setPlayerPosition(maze.getStartPosition().getRowIndex(),maze.getStartPosition().getColumnIndex());
     }
 
-    public void solveMaze(ActionEvent actionEvent) {
-        /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("Solving maze...");
-        alert.show();*/
-        mazeDisplayer.setSolved(true);
-        mazeDisplayer.drawSolution();
-
-
-    }
+//    public void solveMaze(ActionEvent actionEvent) {
+//        /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//        alert.setContentText("Solving maze...");
+//        alert.show();*/
+//        mazeDisplayer.setSolved(true);
+//        mazeDisplayer.drawSolution();
+//
+//
+//    }
 
     public void openFile(ActionEvent actionEvent) {
         FileChooser fc = new FileChooser();
