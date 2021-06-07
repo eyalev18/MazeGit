@@ -32,6 +32,11 @@ public class MazeGeneratorSolver {
         return mazeGenrator;
     }
 
+    public Maze generateLoadedMaze(Maze maze){
+        mazeGenrator = maze;
+        return mazeGenrator;
+    }
+
     public Solution solveRandomMaze(){
         Server solveSearchProblemServer = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
         solveSearchProblemServer.start();

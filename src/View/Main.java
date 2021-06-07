@@ -5,14 +5,20 @@ import Model.MyModel;
 import ViewModel.MyViewModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+
+import java.nio.file.Paths;
 
 public class Main extends Application {
 
+//    MediaPlayer mediaPlayer;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
+//        music();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("Hello World");
@@ -27,4 +33,12 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+    /*public void music() {
+        String s = "resources\\music\\background.mp3";
+        Media m = new Media(Paths.get(s).toUri().toString());
+        mediaPlayer = new MediaPlayer(m);
+        mediaPlayer.setAutoPlay(true);
+        mediaPlayer.play();
+    }*/
 }

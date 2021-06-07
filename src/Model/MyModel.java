@@ -4,7 +4,11 @@ import Server.Configurations;
 import algorithms.mazeGenerators.Maze;
 import algorithms.search.Solution;
 import javafx.scene.control.Alert;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
+import java.io.*;
+import java.nio.file.Paths;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -15,6 +19,8 @@ public class MyModel extends Observable implements IModel {
     private int playerCol;
     private Solution solution;
     private MazeGeneratorSolver generator;
+    MediaPlayer mediaPlayer;
+    MediaPlayer mediaWinner;
 
     public MyModel() {
         generator = new MazeGeneratorSolver();
@@ -23,6 +29,9 @@ public class MyModel extends Observable implements IModel {
     @Override
     public void generateMaze(int rows, int cols) {
         maze = generator.generateRandomMaze(rows, cols);
+        if (mediaWinner != null)
+            mediaWinner.pause();
+        mediaPlayer.play();
         setChanged();
         notifyObservers("maze generated");
         // start position:
@@ -99,6 +108,12 @@ public class MyModel extends Observable implements IModel {
         this.playerCol = col;
         if (maze.getGoalPosition().getRowIndex() == row && maze.getGoalPosition().getColumnIndex() == col){
             movePlayer(maze.getStartPosition().getRowIndex(),maze.getStartPosition().getColumnIndex());
+            mediaPlayer.pause();
+            String s = "resources\\music\\winner.mp3";
+            Media m = new Media(Paths.get(s).toUri().toString());
+            mediaWinner = new MediaPlayer(m);
+            mediaWinner.setAutoPlay(true);
+            mediaWinner.play();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Maze Solved");
             alert.show();
@@ -146,4 +161,36 @@ public class MyModel extends Observable implements IModel {
         alert.show();
     }
 
+    public void music() {
+        String s = "resources\\music\\background.mp3";
+        Media m = new Media(Paths.get(s).toUri().toString());
+        mediaPlayer = new MediaPlayer(m);
+        mediaPlayer.setAutoPlay(true);
+        mediaPlayer.play();
+    }
+
+    public void saveMaze(String chosen) throws IOException {
+        String tempDirectoryPath = System.getProperty("java.io.tmpdir");
+        String file = tempDirectoryPath + chosen;
+        File f = new File(file);
+        ObjectOutputStream save = new ObjectOutputStream(new FileOutputStream(file));
+        byte[] data = maze.toByteArray();
+        save.write(data);
+        save.close();
+        String fileMaze = "./resources/mazes/" + chosen;
+        File f2 = new File(fileMaze);
+        ObjectOutputStream saveM = new ObjectOutputStream(new FileOutputStream(fileMaze));
+        saveM.write(data);
+        saveM.close();
+    }
+
+    public void open(File chosen) throws IOException {
+        ObjectInputStream load = new ObjectInputStream(new FileInputStream(chosen));
+        byte[] byteArr = load.readAllBytes();
+        Maze m = new Maze(byteArr);
+        maze = generator.generateLoadedMaze(m);
+        setChanged();
+        notifyObservers("maze generated");
+        movePlayer(maze.getStartPosition().getRowIndex(), maze.getStartPosition().getColumnIndex());
+    }
 }

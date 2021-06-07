@@ -9,6 +9,8 @@ import javafx.scene.control.Menu;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -101,4 +103,15 @@ public class MyViewModel extends Observable implements Observer {
         model.propertiesDisplay();
     }
 
+    public void music() {
+        model.music();
+    }
+
+    public void saveMaze(String chosen) throws IOException {
+        model.saveMaze(chosen);
+    }
+
+    public void open(File chosen) throws IOException {
+        model.open(chosen);
+    }
 }

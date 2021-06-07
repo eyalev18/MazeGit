@@ -5,6 +5,9 @@ import algorithms.search.Solution;
 import javafx.scene.Node;
 import javafx.scene.control.Menu;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Observer;
 
 public interface IModel {
@@ -17,4 +20,7 @@ public interface IModel {
     void solveMaze();
     Solution getSolution();
     void propertiesDisplay();
+    void music();
+    void saveMaze(String chosen) throws IOException;
+    void open(File chosen) throws IOException;
 }
