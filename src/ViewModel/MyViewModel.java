@@ -114,4 +114,40 @@ public class MyViewModel extends Observable implements Observer {
     public void open(File chosen) throws IOException {
         model.open(chosen);
     }
+
+    public void Unmute() {
+        model.Unmute();
+    }
+
+    public void Mute() {
+        model.Mute();
+    }
+
+    public void movePlayerByDrag(String move) {
+        MovementDirection direction;
+        if (getMaze() != null) {
+            switch (move) {
+                case "UP":
+                    direction = MovementDirection.UP;
+                    break;
+                case "DOWN":
+                    direction = MovementDirection.DOWN;
+                    break;
+                case "LEFT":
+                    direction = MovementDirection.LEFT;
+                    break;
+                case "RIGHT":
+                    direction = MovementDirection.RIGHT;
+                    break;
+                default:
+                    // no need to move the player...
+                    return;
+            }
+            model.updatePlayerLocation(direction);
+        }
+    }
+
+    public void setProperties(int thread, int gen, int search) {
+        model.setProperties(thread, gen, search);
+    }
 }

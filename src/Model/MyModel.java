@@ -11,6 +11,7 @@ import java.io.*;
 import java.nio.file.Paths;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Properties;
 
 public class MyModel extends Observable implements IModel {
 
@@ -152,7 +153,7 @@ public class MyModel extends Observable implements IModel {
 
     @Override
     public void propertiesDisplay() {
-        Configurations x = new Configurations();
+        Configurations x = Configurations.getInstance();
         String gen = x.getGen();
         String thread = x.getPoolSize();
         String search = x.getSearch();
@@ -167,6 +168,19 @@ public class MyModel extends Observable implements IModel {
         mediaPlayer = new MediaPlayer(m);
         mediaPlayer.setAutoPlay(true);
         mediaPlayer.play();
+    }
+
+    public void Mute() {
+        if (mediaWinner != null)
+            if (!(mediaWinner.isMute()))
+                mediaWinner.pause();
+        if (mediaPlayer != null)
+            mediaPlayer.pause();
+    }
+
+    public void Unmute() {
+        if (mediaPlayer != null)
+            mediaPlayer.play();
     }
 
     public void saveMaze(String chosen) throws IOException {
@@ -193,4 +207,13 @@ public class MyModel extends Observable implements IModel {
         notifyObservers("maze generated");
         movePlayer(maze.getStartPosition().getRowIndex(), maze.getStartPosition().getColumnIndex());
     }
+
+    public void setProperties(int thread, int gen, int search) {
+        Configurations c = Configurations.getInstance();
+        Properties p = new Properties();
+        p.setProperty("threadPoolSize", String.valueOf(thread));
+        p.setProperty("mazeGeneratingAlgorithm", String.valueOf(gen));
+        p.setProperty("mazeSearchingAlgorithm", String.valueOf(search));
+    }
+
 }

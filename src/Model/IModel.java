@@ -23,4 +23,7 @@ public interface IModel {
     void music();
     void saveMaze(String chosen) throws IOException;
     void open(File chosen) throws IOException;
+    void Mute();
+    void Unmute();
+    void setProperties(int thread, int gen, int search);
 }

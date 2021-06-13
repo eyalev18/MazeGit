@@ -1,25 +1,24 @@
 package View;
 
+import Model.IModel;
+import Model.MyModel;
 import ViewModel.MyViewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.*;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -29,8 +28,6 @@ public class MyViewController implements Initializable, Observer {
     public MyViewModel viewModel;
     public Pane pane;
     public Button solveButton;
-
-    private Group group = new Group();
 
     public void setViewModel(MyViewModel viewModel) {
         this.viewModel = viewModel;
@@ -44,8 +41,22 @@ public class MyViewController implements Initializable, Observer {
     public Label playerRow;
     public Label playerCol;
 
+    public javafx.scene.control.TextField textField_thread;
+    public javafx.scene.control.TextField textField_mazeGen;
+    public javafx.scene.control.TextField textField_mazeSearch;
+
+    static Stage primaryStage;
+    private Scene scene;
+    private Stage stage;
+    private Parent root;
+
     StringProperty updatePlayerRow = new SimpleStringProperty();
     StringProperty updatePlayerCol = new SimpleStringProperty();
+
+    private double startDragX;
+    private double stopDragX;
+    private double startDragY;
+    private double stopDragY;
 
     public String getUpdatePlayerRow() {
         return updatePlayerRow.get();
@@ -67,23 +78,11 @@ public class MyViewController implements Initializable, Observer {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         playerRow.textProperty().bind(updatePlayerRow);
         playerCol.textProperty().bind(updatePlayerCol);
-        /*String s = "resources\\music\\background.mp3";
-        Media m = new Media(Paths.get(s).toUri().toString());
-        mediaPlayer = new MediaPlayer(m);
-        mediaPlayer.setAutoPlay(true);
-        mediaPlayer.play();*/
     }
 
     public void generateMaze(ActionEvent actionEvent) {
         int rows = Integer.valueOf(textField_mazeRows.getText());
         int cols = Integer.valueOf(textField_mazeColumns.getText());
-        /*group.getChildren().add(pane);
-        Camera camera=new PerspectiveCamera();
-        Scene scene = new Scene(group,416,364.8);
-        scene.setCamera(camera);
-        group.translateXProperty().set(416/2);
-        group.translateYProperty().set(364.8/2);
-        group.translateZProperty().set(-700);*/
         mazeDisplayer.setSolved(false);
         solveButton.setDisable(false);
         viewModel.generateMaze(rows, cols);
@@ -142,7 +141,6 @@ public class MyViewController implements Initializable, Observer {
     }
 
     private void mazeSolved() {
-//        mazeDisplayer.setSolution(viewModel.getSolution());
         mazeDisplayer.setSolved(true);
         mazeDisplayer.drawSolution(viewModel.getSolution());
     }
@@ -165,7 +163,9 @@ public class MyViewController implements Initializable, Observer {
 
     public void scroll(ScrollEvent scrollEvent) {
         double delta = scrollEvent.getDeltaY();
-        group.translateZProperty().set(group.getTranslateZ()+delta);
+        mazeDisplayer.setCellWidth(mazeDisplayer.getCellWidth()+delta);
+        mazeDisplayer.setCellHieght(mazeDisplayer.getCellHieght()+delta);
+        mazeDisplayer.drawMaze(mazeDisplayer.getMaze());
     }
 
     public void saveMaze(ActionEvent actionEvent) throws IOException {
@@ -179,6 +179,58 @@ public class MyViewController implements Initializable, Observer {
         } catch (Exception ex) {
 
         }
+    }
 
+    public void Unmute(ActionEvent actionEvent) {
+        viewModel.Unmute();
+    }
+
+    public void Mute(ActionEvent actionEvent) {
+        viewModel.Mute();
+    }
+
+    public void drag(MouseEvent mouseEvent) {
+        startDragX = mouseEvent.getX();
+        startDragY = mouseEvent.getY();
+    }
+
+    public void dragOver(MouseEvent mouseEvent) {
+        stopDragX = mouseEvent.getX();
+        stopDragY = mouseEvent.getY();
+        dragMove();
+    }
+
+    public void dragMove() {
+        double rightLeft = startDragX - stopDragX;
+        double upDown = startDragY - stopDragY;
+        if (rightLeft > 0 && Math.abs(rightLeft) > Math.abs(upDown)) {
+            viewModel.movePlayerByDrag("LEFT");
+        }
+        else if (rightLeft < 0 && Math.abs(rightLeft) > Math.abs(upDown)) {
+            viewModel.movePlayerByDrag("RIGHT");
+        }
+        else if (upDown < 0 && Math.abs(rightLeft) < Math.abs(upDown)) {
+            viewModel.movePlayerByDrag("DOWN");
+        }
+        else if (upDown > 0 && Math.abs(rightLeft) < Math.abs(upDown)) {
+            viewModel.movePlayerByDrag("UP");
+        }
+    }
+
+    public void propertiesScene(ActionEvent actionEvent) throws IOException {
+        stage = primaryStage;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Properties.fxml"));
+        root = fxmlLoader.load();
+        stage.setTitle("Hello World");
+        stage.setScene(new Scene(root, 1000, 700));
+        stage.show();
+        IModel model = new MyModel();
+        MyViewModel viewModel = new MyViewModel(model);
+        PropertiesController view = fxmlLoader.getController();
+        view.setViewModel(viewModel);
+    }
+
+    public void getStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
 }

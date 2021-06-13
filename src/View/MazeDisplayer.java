@@ -26,6 +26,9 @@ public class MazeDisplayer extends Canvas {
     // wall and player images:
     StringProperty imageFileNameWall = new SimpleStringProperty();
     StringProperty imageFileNamePlayer = new SimpleStringProperty();
+    private double cellWidth = 0.0;
+    private double cellHieght = 0.0;
+
 
     public void setSolved(boolean solved) {
         isSolved = solved;
@@ -73,18 +76,44 @@ public class MazeDisplayer extends Canvas {
 
     public void drawMaze(Maze maze) {
         this.maze = maze;
-        setPlayerPosition(maze.getStartPosition().getRowIndex(),maze.getStartPosition().getColumnIndex());
+        if (getCellHieght()==0.0 && getCellWidth()==0.0) {
+            setCellHieght(getHeight());
+            setCellWidth(getWidth());
+            setPlayerPosition(maze.getStartPosition().getRowIndex(),maze.getStartPosition().getColumnIndex());
+        }
+        else {
+            setCellHieght(getCellHieght());
+            setCellWidth(getCellWidth());
+        }
+//        setPlayerPosition(maze.getStartPosition().getRowIndex(),maze.getStartPosition().getColumnIndex());
         draw();
     }
+
+    public double getCellWidth() {
+        return cellWidth;
+    }
+
+    public void setCellWidth(double cellWidth) {
+        this.cellWidth = cellWidth;
+    }
+
+    public double getCellHieght() {
+        return cellHieght;
+    }
+
+    public void setCellHieght(double cellHieght) {
+        this.cellHieght = cellHieght;
+    }
+
     public void drawSolution(Solution sol) {
         solution = sol;
-        double canvasHeight = getHeight();
-        double canvasWidth = getWidth();
+//        double canvasHeight = getHeight();
+//        double canvasWidth = getWidth();
         int rows = maze.getRows();
         int cols = maze.getCols();
 
-        double cellHeight = canvasHeight / rows;
-        double cellWidth = canvasWidth / cols;
+        double cellHeight = getCellHieght() / rows;
+        double cellWidth = getCellWidth() / cols;
 
         GraphicsContext graphicsContext = getGraphicsContext2D();
         double x ;
@@ -121,17 +150,16 @@ public class MazeDisplayer extends Canvas {
 
     private void draw() {
         if(maze != null){
-            double canvasHeight = getHeight();
-            double canvasWidth = getWidth();
+//            double canvasHeight = getHeight();
+//            double canvasWidth = getWidth();
             int rows = maze.getRows();
             int cols = maze.getCols();
 
-            double cellHeight = canvasHeight / rows;
-            double cellWidth = canvasWidth / cols;
-
+            double cellHeight = getCellHieght() / rows;
+            double cellWidth = getCellWidth() / cols;
             GraphicsContext graphicsContext = getGraphicsContext2D();
             //clear the canvas:
-            graphicsContext.clearRect(0, 0, canvasWidth, canvasHeight);
+            graphicsContext.clearRect(0, 0, getWidth(), getHeight());
 
             drawMazeWalls(graphicsContext, cellHeight, cellWidth, rows, cols);
             if(isSolved==true){
