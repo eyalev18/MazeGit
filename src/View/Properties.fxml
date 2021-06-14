@@ -4,16 +4,24 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import View.* ?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PropertiesController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: green;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PropertiesController">
    <children>
-      <Label layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="158.0" text="ThreadPoolSize:" />
-      <Label layoutX="14.0" layoutY="46.0" prefHeight="32.0" prefWidth="164.0" text="MazeGeneratingAlgorithem:" />
-      <Label layoutX="14.0" layoutY="78.0" prefHeight="32.0" prefWidth="164.0" text="MazeSearchingAlgorithem:" />
+      <Label layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="158.0" style="-fx-text-fill: white;" text="ThreadPoolSize:" />
+      <Label layoutX="14.0" layoutY="46.0" prefHeight="32.0" prefWidth="164.0" style="-fx-text-fill: white;" text="MazeGeneratingAlgorithm:" />
+      <Label layoutX="14.0" layoutY="78.0" prefHeight="32.0" prefWidth="164.0" style="-fx-text-fill: white;" text="MazeSearchingAlgorithm:" />
       <TextField fx:id="textField_thread" layoutX="178.0" layoutY="18.0" text="3" />
       <TextField fx:id="textField_mazeGen" layoutX="178.0" layoutY="49.0" text="2" />
       <TextField fx:id="textField_mazeSearch" layoutX="178.0" layoutY="81.0" text="1" />
-      <Button fx:id="prop" layoutX="126.0" layoutY="147.0" mnemonicParsing="false" onAction="#setProperties" prefHeight="45.0" prefWidth="150.0" text="Set Properties" />
+      <Button fx:id="prop" layoutX="130.0" layoutY="125.0" mnemonicParsing="false" onAction="#setProperties" prefHeight="45.0" prefWidth="150.0" text="Set Properties" />
+      <Label layoutX="3.0" layoutY="181.0" prefHeight="18.0" prefWidth="296.0" style="-fx-text-fill: white;" text="For ThreadPoolSize choose a number bigger than 0." />
+      <Label layoutX="3.0" layoutY="200.0" prefHeight="18.0" prefWidth="382.0" style="-fx-text-fill: white;" text="For MazeGeneratingAlgorithm choose a number between 0 to 2 when:" />
+      <Label layoutX="21.0" layoutY="218.0" prefHeight="18.0" prefWidth="164.0" style="-fx-text-fill: white;" text="0 is Empty Maze Generating" />
+      <Label layoutX="21.0" layoutY="236.0" prefHeight="18.0" prefWidth="164.0" style="-fx-text-fill: white;" text="1 is Simple Maze Generating" />
+      <Label layoutX="21.0" layoutY="254.0" prefHeight="18.0" prefWidth="164.0" style="-fx-text-fill: white;" text="2 is My Maze Generating" />
+      <Label layoutX="3.0" layoutY="283.0" prefHeight="18.0" prefWidth="382.0" style="-fx-text-fill: white;" text="For SearchingAlgorithm choose a number between 0 to 2 when:" />
+      <Label layoutX="21.0" layoutY="301.0" prefHeight="18.0" prefWidth="202.0" style="-fx-text-fill: white;" text="0 is Breadth First Search" />
+      <Label layoutX="21.0" layoutY="319.0" prefHeight="18.0" prefWidth="194.0" style="-fx-text-fill: white;" text="1 is Deapth First Search" />
+      <Label layoutX="21.0" layoutY="337.0" prefHeight="18.0" prefWidth="202.0" style="-fx-text-fill: white;" text="2 is Best First Search" />
    </children>
 </AnchorPane>

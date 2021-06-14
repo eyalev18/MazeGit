@@ -146,8 +146,4 @@ public class MyViewModel extends Observable implements Observer {
             model.updatePlayerLocation(direction);
         }
     }
-
-    public void setProperties(int thread, int gen, int search) {
-        model.setProperties(thread, gen, search);
-    }
 }

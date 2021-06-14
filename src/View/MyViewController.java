@@ -223,7 +223,7 @@ public class MyViewController implements Initializable, Observer {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Properties.fxml"));
         root = fxmlLoader.load();
         stage.setTitle("Properties");
-        stage.setScene(new Scene(root, 1000, 700));
+        stage.setScene(new Scene(root, 600, 500));
         stage.show();
         IModel model = new MyModel();
         MyViewModel viewModel = new MyViewModel(model);
