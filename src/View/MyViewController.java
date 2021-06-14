@@ -12,7 +12,6 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -28,6 +27,7 @@ public class MyViewController implements Initializable, Observer {
     public MyViewModel viewModel;
     public Pane pane;
     public Button solveButton;
+    public Button hideButton;
 
     public void setViewModel(MyViewModel viewModel) {
         this.viewModel = viewModel;
@@ -92,6 +92,7 @@ public class MyViewController implements Initializable, Observer {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("Solving maze...");
         alert.show();
+        hideButton.setDisable(false);
         viewModel.solveMaze();
     }
 
@@ -221,7 +222,7 @@ public class MyViewController implements Initializable, Observer {
         stage = primaryStage;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Properties.fxml"));
         root = fxmlLoader.load();
-        stage.setTitle("Hello World");
+        stage.setTitle("Properties");
         stage.setScene(new Scene(root, 1000, 700));
         stage.show();
         IModel model = new MyModel();
@@ -232,5 +233,37 @@ public class MyViewController implements Initializable, Observer {
 
     public void getStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
+    }
+
+    public void HelpScene(ActionEvent actionEvent) throws IOException {
+        stage = primaryStage;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Help.fxml"));
+        root = fxmlLoader.load();
+        stage.setTitle("About The Game");
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
+        IModel model = new MyModel();
+        MyViewModel viewModel = new MyViewModel(model);
+        PropertiesController view = fxmlLoader.getController();
+        view.setViewModel(viewModel);
+    }
+
+    public void AboutScene(ActionEvent actionEvent) throws IOException {
+        stage = primaryStage;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("About.fxml"));
+        root = fxmlLoader.load();
+        stage.setTitle("About The Game");
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
+        IModel model = new MyModel();
+        MyViewModel viewModel = new MyViewModel(model);
+        PropertiesController view = fxmlLoader.getController();
+        view.setViewModel(viewModel);
+    }
+
+    public void HideSolution(ActionEvent actionEvent) {
+        mazeDisplayer.setSolved(false);
+        hideButton.setDisable(true);
+        mazeDisplayer.drawMaze(mazeDisplayer.getMaze());
     }
 }

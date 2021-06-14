@@ -14,7 +14,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
         Parent root = fxmlLoader.load();
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("The Amazing Maze Project");
         primaryStage.setScene(new Scene(root, 1000, 700));
         primaryStage.show();
         IModel model = new MyModel();

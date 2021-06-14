@@ -32,7 +32,8 @@ public class MyModel extends Observable implements IModel {
         maze = generator.generateRandomMaze(rows, cols);
         if (mediaWinner != null)
             mediaWinner.pause();
-        mediaPlayer.play();
+        if (mediaPlayer.isMute())
+            mediaPlayer.play();
         setChanged();
         notifyObservers("maze generated");
         // start position:

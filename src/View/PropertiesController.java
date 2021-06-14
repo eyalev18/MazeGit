@@ -4,8 +4,6 @@ import Model.IModel;
 import Model.MyModel;
 import Server.Configurations;
 import ViewModel.MyViewModel;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -62,14 +60,7 @@ public class PropertiesController implements Initializable, Observer {
 
     }
 
-    public void setProperties(ActionEvent actionEvent) throws IOException {
-        String thread = textField_thread.getText();
-        String gen = textField_mazeGen.getText();
-        String search = textField_mazeSearch.getText();
-        Configurations c = Configurations.getInstance();
-        c.setGen(gen);
-        c.setPoolSize(thread);
-        c.setSearch(search);
+    private void back(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
         Parent root = fxmlLoader.load();
         stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
@@ -80,5 +71,20 @@ public class PropertiesController implements Initializable, Observer {
         MyViewModel viewModel = new MyViewModel(model);
         MyViewController view = fxmlLoader.getController();
         view.setViewModel(viewModel);
+    }
+
+    public void setProperties(ActionEvent actionEvent) throws IOException {
+        String thread = textField_thread.getText();
+        String gen = textField_mazeGen.getText();
+        String search = textField_mazeSearch.getText();
+        Configurations c = Configurations.getInstance();
+        c.setGen(gen);
+        c.setPoolSize(thread);
+        c.setSearch(search);
+        back(actionEvent);
+    }
+
+    public void BackToMain(ActionEvent actionEvent) throws IOException {
+        back(actionEvent);
     }
 }

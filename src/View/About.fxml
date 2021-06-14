@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: red;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PropertiesController">
+   <children>
+      <Button layoutX="14.0" layoutY="302.0" mnemonicParsing="false" onAction="#BackToMain" prefHeight="84.0" prefWidth="171.0" text="Back To Main" />
+      <TextArea editable="false" prefHeight="258.0" prefWidth="600.0" text="Programes:&#10;Eyal Even-Tov - a 25 years old programer from Mevasert Tzion.&#10;Roni Batanist - 26 years old programer from Ashkelon.&#10;Algorithms:&#10;We use three different generating algorithms to create the maze:&#10;1. Empty Maze Generator - creates an empty maze.&#10;2. Simple Maze Generator - creates a simple maze with simple solution and random walls.&#10;3. My Maze Generator - creates a maze by using randomized Prim's algorithm.&#10;We use three different solving algorithm to solve the maze:&#10;1. Breadth First Search - explores all of the neighbor nodes at the present depth prior to moving on to the&#10;nodes at the next depth level.&#10;2. Depth First Search - explores as far as possible along each branch before backtracking.&#10;3. Best First Search - explores a graph by expanding the most promising node chosen according to&#10;a specified rule." />
+   </children>
+</AnchorPane>
