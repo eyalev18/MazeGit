@@ -8,6 +8,8 @@ import Server.ServerStrategyGenerateMaze;
 import Server.ServerStrategySolveSearchProblem;
 import algorithms.mazeGenerators.Maze;
 import algorithms.search.Solution;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.net.InetAddress;
@@ -17,6 +19,7 @@ public class MazeGeneratorSolver {
 
     private static Maze mazeGenrator;
     private static Solution mazeSolve;
+    private final Logger log = LogManager.getLogger();
 
     public static void main(String[] args) {
         MazeGeneratorSolver generator = new MazeGeneratorSolver();
@@ -26,8 +29,11 @@ public class MazeGeneratorSolver {
 
     public Maze generateRandomMaze(int rows, int cols){
         Server mazeGeneratingServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
+        log.info("Starting server at port 5400");
         mazeGeneratingServer.start();
+        log.info("Generate maze");
         CommunicateWithServer_MazeGenerating(rows, cols);
+        log.info("Stopping server at port 5400");
         mazeGeneratingServer.stop();
         return mazeGenrator;
     }
@@ -39,8 +45,11 @@ public class MazeGeneratorSolver {
 
     public Solution solveRandomMaze(){
         Server solveSearchProblemServer = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
+        log.info("Starting server at port 5401");
         solveSearchProblemServer.start();
+        log.warn("Solve maze");
         CommunicateWithServer_SolveSearchProblem();
+        log.info("Stopping server at port 5401");
         solveSearchProblemServer.stop();
         return mazeSolve;
     }

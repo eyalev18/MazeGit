@@ -220,7 +220,7 @@ public class MyViewController implements Initializable, Observer {
 
     public void propertiesScene(ActionEvent actionEvent) throws IOException {
         stage = primaryStage;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Properties.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Properties.fxml"));
         root = fxmlLoader.load();
         stage.setTitle("Properties");
         stage.setScene(new Scene(root, 600, 500));
@@ -237,7 +237,7 @@ public class MyViewController implements Initializable, Observer {
 
     public void HelpScene(ActionEvent actionEvent) throws IOException {
         stage = primaryStage;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Help.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Help.fxml"));
         root = fxmlLoader.load();
         stage.setTitle("About The Game");
         stage.setScene(new Scene(root, 600, 400));
@@ -250,7 +250,7 @@ public class MyViewController implements Initializable, Observer {
 
     public void AboutScene(ActionEvent actionEvent) throws IOException {
         stage = primaryStage;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("About.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/About.fxml"));
         root = fxmlLoader.load();
         stage.setTitle("About The Game");
         stage.setScene(new Scene(root, 600, 400));

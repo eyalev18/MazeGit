@@ -61,7 +61,7 @@ public class PropertiesController implements Initializable, Observer {
     }
 
     private void back(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/MyView.fxml"));
         Parent root = fxmlLoader.load();
         stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root, 1000, 700);
