@@ -1,7 +1,5 @@
 package View;
 
-import Model.IModel;
-import Model.MyModel;
 import ViewModel.MyViewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -212,8 +210,8 @@ public class MyViewController implements IView, Initializable, Observer {
         stage.setTitle("Properties");
         stage.setScene(new Scene(root, 600, 500));
         stage.show();
-        IModel model = new MyModel();
-        MyViewModel viewModel = new MyViewModel(model);
+//        IModel model = new MyModel();
+//        MyViewModel viewModel = new MyViewModel(model);
         PropertiesController view = fxmlLoader.getController();
         view.setViewModel(viewModel);
     }
@@ -229,8 +227,8 @@ public class MyViewController implements IView, Initializable, Observer {
         stage.setTitle("About The Game");
         stage.setScene(new Scene(root, 600, 400));
         stage.show();
-        IModel model = new MyModel();
-        MyViewModel viewModel = new MyViewModel(model);
+//        IModel model = new MyModel();
+//        MyViewModel viewModel = new MyViewModel(model);
         PropertiesController view = fxmlLoader.getController();
         view.setViewModel(viewModel);
     }
@@ -242,8 +240,8 @@ public class MyViewController implements IView, Initializable, Observer {
         stage.setTitle("About The Game");
         stage.setScene(new Scene(root, 600, 400));
         stage.show();
-        IModel model = new MyModel();
-        MyViewModel viewModel = new MyViewModel(model);
+//        IModel model = new MyModel();
+//        MyViewModel viewModel = new MyViewModel(model);
         PropertiesController view = fxmlLoader.getController();
         view.setViewModel(viewModel);
     }

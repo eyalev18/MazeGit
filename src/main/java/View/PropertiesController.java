@@ -1,7 +1,5 @@
 package View;
 
-import Model.IModel;
-import Model.MyModel;
 import ViewModel.MyViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -58,8 +56,8 @@ public class PropertiesController implements Initializable, Observer {
         scene = new Scene(root, 1000, 700);
         stage.setScene(scene);
         stage.show();
-        IModel model = new MyModel();
-        MyViewModel viewModel = new MyViewModel(model);
+//        IModel model = new MyModel();
+//        MyViewModel viewModel = new MyViewModel(model);
         MyViewController view = fxmlLoader.getController();
         view.setViewModel(viewModel);
     }

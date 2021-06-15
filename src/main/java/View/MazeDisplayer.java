@@ -14,9 +14,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class MazeDisplayer extends Canvas {
-    public Maze getMaze() {
-        return maze;
-    }
 
     private Maze maze;
     private Solution solution;
@@ -28,13 +25,15 @@ public class MazeDisplayer extends Canvas {
     StringProperty imageFileNamePlayer = new SimpleStringProperty();
     private double cellWidth = 0.0;
     private double cellHieght = 0.0;
+    boolean isSolved=false;
 
+    public Maze getMaze() {
+        return maze;
+    }
 
     public void setSolved(boolean solved) {
         isSolved = solved;
     }
-
-    boolean isSolved=false;
 
     public int getPlayerRow() {
         return playerRow;
