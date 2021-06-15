@@ -22,18 +22,12 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
-public class MyViewController implements Initializable, Observer {
+public class MyViewController implements IView, Initializable, Observer {
 
     public MyViewModel viewModel;
     public Pane pane;
     public Button solveButton;
     public Button hideButton;
-
-    public void setViewModel(MyViewModel viewModel) {
-        this.viewModel = viewModel;
-        this.viewModel.addObserver(this);
-        this.viewModel.music();
-    }
 
     public TextField textField_mazeRows;
     public TextField textField_mazeColumns;
@@ -41,12 +35,7 @@ public class MyViewController implements Initializable, Observer {
     public Label playerRow;
     public Label playerCol;
 
-    public javafx.scene.control.TextField textField_thread;
-    public javafx.scene.control.TextField textField_mazeGen;
-    public javafx.scene.control.TextField textField_mazeSearch;
-
     static Stage primaryStage;
-    private Scene scene;
     private Stage stage;
     private Parent root;
 
@@ -58,16 +47,14 @@ public class MyViewController implements Initializable, Observer {
     private double startDragY;
     private double stopDragY;
 
-    public String getUpdatePlayerRow() {
-        return updatePlayerRow.get();
+    public void setViewModel(MyViewModel viewModel) {
+        this.viewModel = viewModel;
+        this.viewModel.addObserver(this);
+        this.viewModel.music();
     }
 
     public void setUpdatePlayerRow(int updatePlayerRow) {
         this.updatePlayerRow.set(updatePlayerRow + "");
-    }
-
-    public String getUpdatePlayerCol() {
-        return updatePlayerCol.get();
     }
 
     public void setUpdatePlayerCol(int updatePlayerCol) {

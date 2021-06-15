@@ -11,7 +11,6 @@ import java.io.*;
 import java.nio.file.Paths;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Properties;
 
 public class MyModel extends Observable implements IModel {
 
@@ -100,7 +99,6 @@ public class MyModel extends Observable implements IModel {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Maze Solved");
             alert.show();
-//            generator.setSolved(false);
         }
 
     }
@@ -209,12 +207,11 @@ public class MyModel extends Observable implements IModel {
         movePlayer(maze.getStartPosition().getRowIndex(), maze.getStartPosition().getColumnIndex());
     }
 
-    public void setProperties(int thread, int gen, int search) {
+    public void setProperties(String thread, String gen, String search) {
         Configurations c = Configurations.getInstance();
-        Properties p = new Properties();
-        p.setProperty("threadPoolSize", String.valueOf(thread));
-        p.setProperty("mazeGeneratingAlgorithm", String.valueOf(gen));
-        p.setProperty("mazeSearchingAlgorithm", String.valueOf(search));
+        c.setGen(gen);
+        c.setPoolSize(thread);
+        c.setSearch(search);
     }
 
 }

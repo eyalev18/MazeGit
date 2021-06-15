@@ -4,10 +4,7 @@ import Model.IModel;
 import Model.MovementDirection;
 import algorithms.mazeGenerators.Maze;
 import algorithms.search.Solution;
-import javafx.scene.Node;
-import javafx.scene.control.Menu;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
@@ -89,7 +86,7 @@ public class MyViewModel extends Observable implements Observer {
                 direction = MovementDirection.RIGHT;
                 break;
             default:
-                // no need to move the player...
+                // no need to move the player
                 return;
         }
         model.updatePlayerLocation(direction);
@@ -140,10 +137,14 @@ public class MyViewModel extends Observable implements Observer {
                     direction = MovementDirection.RIGHT;
                     break;
                 default:
-                    // no need to move the player...
+                    // no need to move the player
                     return;
             }
             model.updatePlayerLocation(direction);
         }
+    }
+
+    public void setProperties(String thread, String gen, String search) {
+        model.setProperties(thread, gen, search);
     }
 }

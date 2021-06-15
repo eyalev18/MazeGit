@@ -2,11 +2,8 @@ package Model;
 
 import algorithms.mazeGenerators.Maze;
 import algorithms.search.Solution;
-import javafx.scene.Node;
-import javafx.scene.control.Menu;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Observer;
 
@@ -25,5 +22,5 @@ public interface IModel {
     void open(File chosen) throws IOException;
     void Mute();
     void Unmute();
-    void setProperties(int thread, int gen, int search);
+    void setProperties(String thread, String gen, String search);
 }

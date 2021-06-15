@@ -85,7 +85,6 @@ public class MazeDisplayer extends Canvas {
             setCellHieght(getCellHieght());
             setCellWidth(getCellWidth());
         }
-//        setPlayerPosition(maze.getStartPosition().getRowIndex(),maze.getStartPosition().getColumnIndex());
         draw();
     }
 
@@ -107,8 +106,6 @@ public class MazeDisplayer extends Canvas {
 
     public void drawSolution(Solution sol) {
         solution = sol;
-//        double canvasHeight = getHeight();
-//        double canvasWidth = getWidth();
         int rows = maze.getRows();
         int cols = maze.getCols();
 
@@ -126,10 +123,6 @@ public class MazeDisplayer extends Canvas {
         } catch (FileNotFoundException e) {
             System.out.println("There is no wall image file");
         }
-
-//        SearchableMaze searchableMaze = new SearchableMaze(this.maze);
-//        BestFirstSearch BFS= new BestFirstSearch();
-//        Solution solution = BFS.solve(searchableMaze);
         ArrayList<AState> solutionPath = solution.getSolutionPath();
         int r=0;
         int c=0;
@@ -150,8 +143,6 @@ public class MazeDisplayer extends Canvas {
 
     private void draw() {
         if(maze != null){
-//            double canvasHeight = getHeight();
-//            double canvasWidth = getWidth();
             int rows = maze.getRows();
             int cols = maze.getCols();
 
